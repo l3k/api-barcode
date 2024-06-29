@@ -7,7 +7,7 @@
     "dev": "nodemon --watch 'src/' --exec 'ts-node-dev --files src/server.ts' -e ts --ignore '**.json'",
     "compile": "tsc --project ./tsconfig.json",
     "build:clean": "rm -r ./dist && mkdir ./dist",
-    "build": "yarn build:clean && yarn compile"
+    "build": "npm run build:clean && npm run compile"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
