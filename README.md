@@ -2,6 +2,13 @@
     Barcode Scanner API
 </h1>
 
+<p align="center">
+  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-links">Links</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-como-excutar">Como excutar</a>
+</p>
+
 ## 💻 Projeto
 
 A API foi desenvolvida com o objetivo de facilitar o controle de consumo de alimentos vendidos no [Espaço CMAKER](https://www.cmaker.com.br/).
