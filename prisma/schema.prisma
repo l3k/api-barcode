@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  APP
+}
+
+model User {
+  id                    String    @id @default(uuid())
+  name                  String
+  email                 String    @unique
+  password              String
+  role                  Role      @default(APP)
+  refresh_token         RefreshToken?
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id                    String      @id @default(uuid())
+  expiresIn             Int
+  user                  User        @relation(fields: [userId], references: [id])
+  userId                String      @unique
+
+  @@map("refresh_token")
+}
+
+model Product {
+  id                    String      @id @default(uuid())
+  name                  String
+  description           String?
+  value                 Decimal     @db.Decimal(10, 2)
+  code                  String
+  orders                Order[]     @relation("Product")
+
+  @@map("products")
+}
+
+model Associate {
+  id                    String      @id @default(uuid())
+  name                  String
+  document              String
+  phone                 String?
+  email                 String
+  orders                Order[]     @relation("Associate")
+
+  @@map("associates")
+}
+
+model Order {
+  id                    String      @id @default(uuid())
+  qtd                   Int
+  amount                Decimal     @db.Decimal(10, 2)
+  obs                   String?
+  createdAt             DateTime    @default(now())
+  associate             Associate   @relation(fields: [associateId], references: [id], name: "Associate")
+  associateId           String
+  product               Product     @relation(fields: [productId], references: [id], name: "Product")
+  productId             String
+
+  @@map("orders")
+}
